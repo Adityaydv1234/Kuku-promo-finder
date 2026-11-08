@@ -1,0 +1,14 @@
+# Kuku's screenplay pack and anything derived from it are confidential: never commit.
+data/
+outputs/
+.cache/
+*.zip
+*.txt
+!requirements.txt
+.env
+.streamlit/secrets.toml
+__pycache__/
+.pytest_cache/
+venv/
+.env.*
+!.env.example

@@ -1,0 +1,32 @@
+# Swap models here (or in the Streamlit sidebar). API keys come from env vars:
+#   GEMINI_API_KEY, GROQ_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY (+ OPENAI_BASE_URL)
+provider: gemini            # gemini | groq | anthropic | openai | heuristic (no LLM, offline)
+model: gemini-3.5-flash-lite  # e.g. gemini-2.5-flash, llama-3.3-70b-versatile, claude-sonnet-4-6
+min_interval: 4.5           # seconds between API calls (free-tier rate limits)
+
+# discovery
+promos_per_episode: 3
+context_episodes: 5         # previous loglines given to the discovery model
+retry_invalid: true         # one retry with validator feedback, then reject
+
+# validation (deterministic)
+min_duration: 20
+max_duration: 60
+hook_window: 3.0            # hook beat must start within N s of clip start
+cliffhanger_window: 8.0     # cliffhanger beat must end within N s of clip end
+
+# ranking
+weights:
+  hook_strength: 0.30
+  cliffhanger_strength: 0.30
+  standalone_clarity: 0.25
+  emotional_impact: 0.15
+evidence_penalty: 0.5       # if judge evidence quotes are not in the clip
+overlap_threshold: 0.5
+top_n: 10
+max_per_episode_top: 2
+
+# evaluation
+review_n: 10                # AI top-N vs N random clips in the blind review sheet
+seed: 7
+# episodes: [1, 2, 3]       # optional: run a subset
